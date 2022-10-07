@@ -1,0 +1,36 @@
+\chapter{RELATED WORK}
+
+There has been some research work proposing the reduction of the transmitted data by minimizing the frequency that the workers communicate with each other. 
+For example, CoCoA \cite{NIPS2014_5599} is a dual coordinate ascent algorithm that performs several local steps before communicating with other workers. 
+
+De Sa et al. \cite{de2017understanding} developed a low-precision asynchronous SGD method that increases the throughput and improves the speed of low-precision SGD.
+They also implemented this algorithm on an FPGA which mitigates the computational overhead.
+
+Popular communication libraries (OpenMPI, NCCL, etc.) do not support sparse data structures that are necessary for many compression methods. Renggli et al. developed SparcML \cite{sparcml}, a framework that implements a stream structure to support sparse tensors.
+Also, Sapio et al. \cite{SwitchML} proposed SwitchML, which uses a programmable network switch to implement in-network aggregation while packets are transmitted through the network. 
+Without using compression, SwitchML reduces the transmitted data because of the computation on the network switch.
+
+Instead of compressing the communicated gradient, many papers (e.g., \cite{AnwarHS15, Courbariaux_2015, Lin:2016:FPQ:3045390.3045690,zipml})  propose to compress the model parameters. 
+ZIPML \cite{zipml}, in particular, applies compression similar to that of QSGD to the model, data, and gradient.
+
+In \cite{Kim2018}, Kim et al.\ proposed to use convolution to transfer knowledge~(weights) in the network. 
+Recently, Yu et al.\ \cite{yu2018double} proposed a general scheme called \emph{double quantization}, that quantizes both model parameters and gradients. 
+
+Alvarez and Salzmann \cite{NIPS2017_6687}
+explicitly account for compression in the training process by 
+introduced a regularizer in the objective function that encourages the sparsity of the model parameters.  
+
+communication framework without memory.~Also, Tang et al.\ in~\cite{tang2019doublesqueeze} proposed a bidirectional compression scheme called double squeeze~(DS). Although, DS is equipped with memory at both the master and the workers and supports biased and unbiased compressors.
+
+    % Bloom Filters with a False positive Free Zone
+    %     % There is a paper called “Bloom Filter with a False Positive Free Zone” that discusses about a genre of Bloom Filters that guarantees no false-positives under some strict assumptions. i.e. a closed universe and an extremely small set of items inserted in the filter. However, a small increase in the items set will cause an enormous increase in the bloom filter size, making it unsuitable for our setting.
+    %     \cite{8486415}
+    % \section{Other compression methods}
+    % Quantization, Hybrid and Low-rank. Use the material from GRACE-Section III, but LESS details.
+    
+
+Recently, Dutta et al. in \cite{layer-wise}, proposed a bidirectional layer-wise compressed 
+
+    
+    % Use the material from GRACE-Section VI. Add MORE details. Aritra has a more detailed (older) version. Ask him.
+    

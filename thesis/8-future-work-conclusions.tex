@@ -1,0 +1,31 @@
+\chapter{FUTURE WORK \& CONCLUSIONS}
+
+Below, we discuss some possible future directions of this work:
+\begin{itemize}
+
+    \item \textbf{GPU Implementations}
+    
+    Within the scope of this thesis, we have not considered at all the actual elapsed time needed for training these models. We were solely focused on reducing the volume of data communicated over the network.
+    Our implementations for the bloom filter compression operators run on CPU which significantly increases the elapsed training time.
+    GPU implementations for all these operators must also be provided for a fair comparison.
+    
+    \item \textbf{FPGA Implementations}
+    
+    Implementing GPU kernels for our operators will surely decrease the elapsed training time but will not alleviate training from the extra computational time imposed by our methods.
+    One idea for mitigating this overhead would be to provide FPGA implementations for our algorithms instead.
+    
+    \item \textbf{Compress both indices and values} 
+    
+    So far, we have proposed ways for compressing either the indices or the values of the sparsified gradients. The gain ratios depicted in the evaluation section do not reflect the actual, overall gain because in each case, we were computing either the indices or the values bits but not both.
+    One idea that remains to explore, is combining both the bloom filter compression method for compressing the indices and the values approximations approach for compressing the values.
+    
+\end{itemize}
+
+In this work, we proposed the bloom filter compression method and the values approximation method for encoding the indices and the values of the sparsified gradients, respectively.
+We introduced a very unique use-case for the bloom filter data structures and we developed ideas for increasing their performance under this specific setting.
+We also achieved a massive reduction of the sparsified tensor values by compressing them with the values approximation approach.
+
+One of our goals while implementing these ideas was to construct a framework that supports the integration of a variety of such encoding methods.
+The techniques that we developed are only some examples of sparsified gradient compression.
+The bloom filter compression for example might be less ideal than other approaches even though it creates a very interesting setting for the usage of bloom filters.
+

@@ -1,0 +1,63 @@
+\chapter{INTRODUCTION}
+    \section{Main Concept}
+    In recent years, deep learning has been established as a major research area in the scientific community. 
+    The more we step into the future, building continuously upon our newest advances and repeatedly pushing the state of the art, the limitation of our tools and computational resources becomes a bottleneck and slows down our progress.
+    
+    Neural network architectures become more complex and sophisticated. Our abundance of training data as well as our need for larger models with more trainable parameters has made us crave for more computational power, better algorithmic solutions and more powerful systems that will accelerate training.
+    
+    Most current deep learning frameworks mitigate these issues by employing a variety of techniques. Exploiting the inherent parallelism of training computations and distributing workload among multiple workers are only a few of those. 
+
+    Within the scope of this thesis, we focus on the later technique and one particular instantiation of it, widely-known as the data parallelism approach. 
+    
+    As the title implies, this method suggests that we split the data into multiple partitions and feed them to different replicas of the model that is to be trained. Those replicas usually reside in different nodes and work separately on their designated partition. 
+    
+    Similar to the divide and conquer paradigm, however, these workers need to communicate with each other and merge their local results in order to progress training in a collective way. 
+    In this setting, local results are considered to be the gradients computed during the backward pass of each iteration of the backpropagation algorithm. 
+    At each step, every worker constructs an aggregated version for each of those gradients (e.g. average) and uses them to update its parameters according to the underlying optimization rule (optimizer). 
+    Intuitively, this allows the worker to accumulate and consider all the "knowledge" that has been separately collected by all the other workers while at the same time contributing similarly by broadcasting its own "knowledge".
+    
+    This gradient exchange, however, imposes a great performance overhead, not only because of the synchronization that needs to happen between workers, but also because of the network limitations that often cause a bottleneck. 
+    
+    This has led to the development of various lossy compression techniques that aim to reduce the size of the gradients passed between workers and thus, the network traffic.
+    Every such compression technique is usually followed by some properties and guarantees regarding convergence of the model, as well as performance. 
+    
+    In this work, we step on various of these already existing compression techniques and try to achieve an even more aggressive reduction of the size of the gradients by applying several lossless or lossy encoding methods.
+
+    \section{Motivation}
+        \subsection{Communication Efficiency}
+            Communication over the network might often impose a bottleneck for the overall training process. 
+            While there has been a great focus on increasing the processing power for devices such as GPUs and TPUs, the actual development of better network communication infrastructures has been disproportionately small. Tackling this issue by employing strategies that will reduce the size of the messages communicated over the network and thus, alleviate the network's workload seems like the most straightforward and reasonable solution for now.
+            Compressing and decompressing the gradients, however, does not come without a cost. The trade-off that one needs to consider before turning to such methods, is the extra computational cost that is imposed on the side of the workers. In some cases, it might be better in terms of performance to avoid this computational overhead and compromise with the one induced by the network.
+        \subsection{Redundancy in Gradients Exchange}
+            There have been some studies suggesting that a great percentage of the information carried in the gradient vectors is redundant for the training process \cite{lin2017deep}.
+            This was a key point for our work, since many of the encoding methods that we used on top of the aforementioned gradients compression, were also lossy in nature. 
+            The knowledge that training can progress despite the lack of some information, is what enabled us to experiment with these ideas on the first place.
+        \subsection{Federated Learning}
+            Federated learning, also known as collaborative learning, is an alternative approach for training a model. It takes place in a decentralized setting where multiple client devices help in the training process not only by putting into use their own processing power but by also exploiting their own local data.
+            The endgame is to build a single, robust machine learning model that will be trained on all of this decentralized data without sharing it to the outside world. This idea resembles a lot the distributed training setting that we described earlier where multiple models train independently in different nodes and share their local gradients. Network communication also takes place here and the more popularized this training technique becomes the more we need to focus on communication efficiency \cite{konen2016federated}.
+        \subsection{Research Purposes}
+            A great portion of this work is dedicated to an encoding method that uses bloom filters.
+            As we will describe later when we formulate the encoding and decoding algorithms, 
+            the setting under which these bloom filters operate is very unique. 
+            We build an interesting use-case for these data structures and we try to come up with novel ideas for minimizing the false positive rate under these circumstances.
+    
+    % \section{What has been done in the past for that particular problem?}
+    % \section{What are YOU proposing?}
+    % \section{Why is your solution better than existing ones?}
+    
+    \section{Structure of Thesis}
+        The rest of the thesis is organized as follows:
+        
+        \textit{Background} provides basic, fundamental knowledge about the concepts that are being dealt with throughout the entire thesis.
+    
+        \textit{Compressing the tensor indices} provides an in-depth description of our bloom filter
+        encoding/decoding method.
+
+        \textit{Fitting the tensor values} describes yet another encoding/decoding algorithm that is based on the idea of approximating the local gradients using some exponential basis functions.
+        
+        \textit{Implementation} provides some technical information about our experimentation setup.
+        
+        \textit{Evaluation} presents our results in terms of performance and accuracy from 
+        training some deep neural networks 
+
+        \textit{Future work \& Conclusions} discusses ideas that could possibly extend and improve our current work and provides some final conclusions.

@@ -1,0 +1,321 @@
+% demo.tex
+%
+% Enjoy, evolve, and share!
+%
+% Compile it as follows:
+%   latexmk
+%
+% Check file `dithesis.cls' for other configuration options.
+%
+\documentclass[preface]{dithesis}
+
+%\usepackage{graphicx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{multirow}
+
+\hypersetup{
+    unicode=true,                     % non-Latin characters in bookmarks
+    pdffitwindow=true,                % page fit to window when opened
+    pdfnewwindow=true,                % links in new window
+    pdfkeywords={},                   % list of keywords
+    colorlinks=true,                  % false: boxed links; true: colored links
+    linkcolor=black,                  % color of internal links
+    citecolor=black,                  % color of links to bibliography
+    filecolor=black,                  % color of file links
+    urlcolor=black,                   % color of external links
+    pdftitle={},                      % title
+    pdfauthor={},                     % author
+    pdfsubject={}                     % subject of the document
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[colorinlistoftodos,bordercolor=orange,backgroundcolor=orange!20,linecolor=orange,textsize=scriptsize]{todonotes}
+\newcommand{\kelly}[1]{\todo[inline]{\textbf{Kelly: }#1}} 
+\newcommand{\ad}[1]{\textcolor{red}{#1}}
+\newcommand{\aritra}[1]{\todo[inline]{\textbf{Aritra: }#1}} 
+
+
+% \usepackage{algorithm}
+% \usepackage{algorithmic}
+% \usepackage[noend]{algpseudocode}
+% \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+% \SetAlFnt{\small}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{enumitem}
+
+% \usepackage{verbatim}
+%%% Basic sets
+\newcommand{\R}{\mathbb{R}} % Reals
+\newcommand{\N}{\mathbb{N}} % Naturals
+\newcommand{\mbE}{\mathbb{E}} % Eucliden
+\newcommand{\mcC}{\mathbb{C}} %continuous function
+% caligraphic
+\newcommand{\cA}{{\cal A}}
+\newcommand{\cB}{{\cal B}}
+\newcommand{\cC}{{\cal C}}
+\newcommand{\cD}{{\cal D}}
+\newcommand{\cE}{{\cal E}}
+\newcommand{\cF}{{\cal F}}
+\newcommand{\cG}{{\cal G}}
+\newcommand{\cH}{{\cal H}}
+\newcommand{\cI}{{\cal I}}
+
+\newcommand{\cJ}{{\cal J}}
+\newcommand{\cK}{{\cal K}}
+\newcommand{\cL}{{\cal L}}
+\newcommand{\cM}{{\cal M}}
+\newcommand{\cN}{{\cal N}}
+\newcommand{\cO}{{\cal O}}
+\newcommand{\cP}{{\cal P}}
+\newcommand{\cQ}{{\cal Q}}
+\newcommand{\cR}{{\cal R}}
+\newcommand{\cS}{{\cal S}}
+\newcommand{\cT}{{\cal T}}
+\newcommand{\cU}{{\cal U}}
+\newcommand{\cV}{{\cal V}}
+\newcommand{\cX}{{\cal X}}
+\newcommand{\cY}{{\cal Y}}
+\newcommand{\cW}{{\cal W}}
+\newcommand{\cZ}{{\cal Z}}
+
+% matrices
+\newcommand{\mA}{{\bf A}}
+\newcommand{\mB}{{\bf B}}
+\newcommand{\mC}{{\bf C}}
+\newcommand{\mD}{{\bf D}}
+
+\newcommand{\mE}{{\bf E}}
+\newcommand{\mF}{{\bf F}}
+\newcommand{\mG}{{\bf G}}
+\newcommand{\mH}{{\bf H}}
+\newcommand{\mI}{{\bf I}}
+\newcommand{\mJ}{{\bf J}}
+\newcommand{\mK}{{\bf K}}
+\newcommand{\mL}{{\bf L}}
+\newcommand{\mM}{{\bf M}}
+\newcommand{\mN}{{\bf N}}
+\newcommand{\mO}{{\bf O}}
+\newcommand{\mP}{{\bf P}}
+\newcommand{\mQ}{{\bf Q}}
+\newcommand{\mR}{{\bf R}}
+\newcommand{\mS}{{\bf S}}
+\newcommand{\mT}{{\bf T}}
+\newcommand{\mU}{{\bf U}}
+\newcommand{\mV}{{\bf V}}
+\newcommand{\mW}{{\bf W}}
+\newcommand{\mX}{{\bf X}}
+\newcommand{\mY}{{\bf Y}}
+\newcommand{\mZ}{{\bf Z}}
+\newcommand{\mLambda}{{\bf \Lambda}}
+
+\newcommand{\zeros}{{\bf 0}}
+\newcommand{\ones}{{\bf 1}}
+
+ \usepackage{xcolor}
+\usepackage{color}
+\usepackage[autostyle=false, style=english]{csquotes}
+\MakeOuterQuote{"}
+\usepackage{amssymb}
+
+
+% First name, last name
+\authorFirstGr{Καλλιόπη}
+\authorFirstAbrGr{Κ.} % abbreviation of first name
+\authorMiddleGr{Π.}   % abbreviation of father's first name
+\authorLastGr{Κωστοπούλου}
+\authorFirstEn{Calliope}
+\authorFirstAbrEn{C.}
+\authorMiddleEn{P.}
+\authorLastEn{Kostopoulou}
+\authorSn{DS1180008}
+
+
+% The title of the thesis
+\titleEn{Sparse Communication for Deep Learning}
+\titleGr{Αραιή Επικοινωνία για Βαθιά Μάθηση}
+
+% Month followed by Year
+\dateGr{ΙΟΥΝΙΟΣ 2020}
+\dateEn{JUNE 2020}
+
+% Supervisor(s) info
+\supervisorGr{Αλέξανδρος Ντούλας}{Καθηγητής ΕΚΠΑ}
+\supervisorGr{Aritra Dutta}{Μεταδιδακτορικός Ερευνητής KAUST}
+\supervisorGr{Πάνος Καλνής}{Καθηγητής KAUST}
+\supervisorEn{Alexandros Ntoulas}{Professor NKUA}
+\supervisorEn{Aritra Dutta}{Postdoctoral Researcher KAUST}
+\supervisorEn{Panos Kalnis}{Professor KAUST}
+
+\boardTwoGr{Aritra Dutta}
+\boardTwoRankGr{Μεταδιδακτορικός Ερευνητής}
+\boardTwoOrgGr{KAUST}
+\boardTwoEn{Aritra Dutta}
+\boardTwoRankEn{Professor}
+\boardTwoOrgEn{KAUST}
+
+\boardThreeGr{Ιωάννης Εμίρης}
+\boardThreeRankGr{Καθηγητής}
+\boardThreeOrgGr{ΕΚΠΑ}
+\boardThreeEn{Ioannis Emiris}
+\boardThreeRankEn{Professor}
+\boardThreeOrgEn{NKUA}
+
+% Abstract, synopsis, inscription, ack, and preface pages.
+\input{thesis/abstract}
+
+% \acksEn{
+% }
+
+\input{thesis/preface}
+
+\inscriptionEn{\emph{-}}
+
+% Subject area and keywords
+\subjectAreaGr{Κατανεμημένη εκπαίδευση νευρωνικών δικτύων}
+\subjectAreaEn{Distributed Training of Deep Neural Networks}
+\keywordsGr{συμπιεσμένη επικοινωνία, βαθιά μάθηση, κατανεμημένα συστήματα}
+\keywordsEn{compressed communication, deep learning, distributed systems}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\frontmatter
+\mainmatter
+
+% CHAPTER 1
+\input{thesis/1-introduction}
+\newpage
+
+% Chapter 2
+\input{thesis/2-background}
+
+% Chapter 3
+% \input{thesis/3-related-work}
+
+% Chapter 4
+\input{thesis/4-compressing-the-tensor-indices}
+
+% Chapter 5
+\input{thesis/5-fitting-the-tensor-values}
+
+% Chapter 6
+\input{thesis/6-implementation}
+
+% Chapter 7
+\input{thesis/7-evaluation}
+
+% Chapter 8
+\input{thesis/8-future-work-conclusions}
+
+
+\backmatter
+
+% abbreviations table
+\abbreviations
+\begin{center}
+	\begin{tabularx}{\textwidth}{|p{3cm}|p{12.615cm}|}
+	\hline
+	KAUST & King Abdullah University of Science and Technology \\  \hline
+	NKUA    & National and Kapodistrian University of Athens\\  \hline
+	GPU    & Graphics Processing Unit \\  \hline
+	TPU    & Tensor Processing Unit \\  \hline
+	AMQ    & Approximate Membership Query data structure \\  \hline
+	FPR    & False Positive Rate \\  \hline
+	RLE    & Run Length Encoding \\  \hline
+	LS     & Least Squares \\  \hline
+	SGD    & Stochastic Gradient Descent \\
+	\hline
+	\end{tabularx}
+\end{center}
+
+% appendix
+\begin{appendix}
+% mark the beginning of the appendix
+\appendixstartedtrue
+
+% add appendix line to ToC
+\phantomsection
+\addcontentsline{toc}{chapter}{ANNEX}
+
+\chapter{Values Approximation Compression}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{thesis/figures/logit_step0 _.png}
+\caption{LS regression using logit basis functions}
+\medskip
+\small
+Resnet20 - first step of training - convolutional layers - linear regression using logit basis functions
+\label{regressor}
+\end{figure}
+
+\newpage
+
+\begin{lstlisting}
+# Definition of the Bloom filter operators in tensorflow
+
+using namespace tensorflow;
+
+REGISTER_OP("BloomCompressor")
+.Attr("T: {int32, int64, float16, float32, float64}")
+.Attr("false_positives_aware: bool")
+.Attr("policy: string")
+.Attr("hash_num: int")
+.Attr("bloom_size: int")
+.Attr("bloom_logs_path: string")
+.Attr("gradient_id: int")
+.Attr("rank: int")
+.Attr("verbosity_frequency: int")
+.Attr("verbosity: int")
+.Input("values: T")
+.Input("indices: int32")
+.Input("initial_tensor: int32")
+.Input("step: int64")
+.Output("compressed_tensor: int8")
+.Doc(R"doc(Receives the values and the indices, 
+           build a bloom filter on the indices 
+           and returns the values concatenated with the filter)doc");
+
+REGISTER_OP("BloomDecompressor")
+.Attr("policy: string")
+.Attr("mem_mode: int")
+.Attr("hash_num: int")
+.Attr("bloom_size: int")
+.Attr("bloom_logs_path: string")
+.Attr("gradient_id: int")
+.Attr("rank: int")
+.Attr("suffix: int")
+.Attr("verbosity_frequency: int")
+.Attr("verbosity: int")
+.Input("compressed_tensor: int8")
+.Input("decompressed_size: int32")
+.Input("step: int64")
+.Output("decompressed_tensor: int32")
+.Doc(R"doc(Splits the compressed tensor into 
+           values and bloom filter, decodes the indices and 
+           returns the re-constructed gradient)doc");
+
+\end{lstlisting}
+
+\end{appendix}
+% manually include the bibliography
+\bibliographystyle{plain}
+\bibliography{references}
+% include it also in ToC (do sth on your own)
+\addcontentsline{toc}{chapter}{REFERENCES}
+
+
+\end{document}
